@@ -14,4 +14,52 @@
 (provide ins_beg)
 
 (define (ins_beg el lst)
-  (display "Hello, I'm ins_beg!\n"))
+  (append 'el 'lst)
+  )
+
+(provide ins_end)
+
+(define (ins_end el lst)
+  (append 'lst 'el)
+  )
+
+(provide cout_top_level)
+  
+(define (cout_top_level lst)
+  (+1 (cout_top_level (cdr lst)))
+  )
+
+(provide count_instances)
+
+(define (count_instances el lst)
+  (cond(= el (car lst)) (+1 (cout_top_level (cdr lst))))
+  )
+  
+(provide count_instances_tr)
+(provide count)
+
+(define (count_instances_tr el lst)
+  (count_tr el lst 0)
+  )
+
+(define (count_tr el lst num)
+  (cond(= el (car lst)) (count el (cdr lst) (+ num 1)))
+  )
+
+(provide count_instances_deep)
+
+(define (count_instances_deep el lst)
+  (count_deep el lst 0)
+  )
+
+(define (count_deep el lst num)
+  (if (= (car lst) list)
+      (if
+       (= el (car lst)) (count_deep el (cdr lst) (+ num 1))
+      (else
+       (count_deep el cdr lst num)))
+  (else (= el (car lst))
+        (count el (cdr lst) (+ num 1))))
+  )
+ 
+
